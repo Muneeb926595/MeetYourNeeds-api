@@ -1,0 +1,12 @@
+{
+  "baseUrl": "/server/",
+  "name": "MeetYourNeeds-api",
+  "port": 3000,
+  "jwtPrivateKey":"123",
+  "host":"http://localhost",
+  "DataBase_Name": "fyp",
+  "mongoDb": {
+    "uri": "mongodb://localhost/fyp",
+    "port": "27017"
+  }
+}
