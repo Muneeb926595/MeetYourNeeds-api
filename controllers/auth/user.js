@@ -1,9 +1,4 @@
 const bycrypt = require("bcryptjs");
-// const Jwt = require("jsonwebtoken");
-// const nodemailer = require("nodemailer");
-// const config = require("config");
-// const mongoose = require("mongoose");
-// const fs = require("fs");
 
 const { User, validateUser } = require("../../models/auth/user");
 

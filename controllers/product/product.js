@@ -12,7 +12,6 @@ exports.addProduct = async (req, res, next) => {
     difficulty,
     category,
   });
-  console.log(product);
   if (req.file) {
     const { destination, filename } = req.file;
     if (isImage(req.file.mimetype)) {
@@ -22,4 +21,9 @@ exports.addProduct = async (req, res, next) => {
   const result = await product.save();
 
   return res.status(200).send(result);
+};
+
+exports.getAllProducts = async (req, res, next) => {
+  const products = await Product.find().populate("userId", "userName");
+  return res.status(200).send(products);
 };
