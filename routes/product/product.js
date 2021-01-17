@@ -45,4 +45,6 @@ router.post(
   productController.addProduct
 );
 
+router.get("/product", auth, productController.getAllProducts);
+
 module.exports = router;

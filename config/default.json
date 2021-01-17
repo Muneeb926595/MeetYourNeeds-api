@@ -4,9 +4,9 @@
   "port": 3000,
   "jwtPrivateKey":"123",
   "host":"http://localhost",
-  "DataBase_Name": "fyp",
+  "DataBase_Name": "MeetYourNeeds",
   "mongoDb": {
-    "uri": "mongodb://localhost/fyp",
+    "uri": "mongodb+srv://MeetYourNeeds:9wlm4Vz3t3egCmIf@cluster0.dp2d4.mongodb.net/test",
     "port": "27017"
   }
 }
