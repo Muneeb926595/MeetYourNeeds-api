@@ -14,10 +14,10 @@ const app = express();
 require("./startup/prod")(app);
 app.use(express.json());
 
-app.use("/api/images", express.static(path.join(__dirname, "public/uploads")));
+app.use("/api/images", express.static(path.join(__dirname, "/public/uploads")));
 app.use(
   "/api/videos",
-  express.static(path.join(__dirname, "public/uploads/videos"))
+  express.static(path.join(__dirname, "/public/uploads/videos"))
 );
 app.use("/api", routes);
 app.use(errors);
