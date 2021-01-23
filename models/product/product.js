@@ -12,13 +12,13 @@ const productSchema = new Schema(
     title: {
       type: String,
     },
+    price: {
+      type: String,
+    },
     description: {
       type: String,
     },
     image: {
-      type: String,
-    },
-    difficulty: {
       type: String,
     },
     category: {
