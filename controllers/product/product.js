@@ -3,13 +3,13 @@ const { isImage } = require("../../utils");
 const { Product } = require("../../models/product/product");
 
 exports.addProduct = async (req, res, next) => {
-  const { userId, title, description, difficulty, category } = req.body;
+  const { userId, title, price, description, category } = req.body;
 
   let product = new Product({
     userId,
     title,
+    price,
     description,
-    difficulty,
     category,
   });
   if (req.file) {
