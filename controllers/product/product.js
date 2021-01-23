@@ -24,6 +24,8 @@ exports.addProduct = async (req, res, next) => {
 };
 
 exports.getAllProducts = async (req, res, next) => {
-  const products = await Product.find().populate("userId", "userName");
+  const products = await Product.find()
+    .populate("userId", "userName")
+    .sort({ createdAt: -1 });
   return res.status(200).send(products);
 };
