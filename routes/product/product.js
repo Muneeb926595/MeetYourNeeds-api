@@ -46,5 +46,6 @@ router.post(
 );
 
 router.get("/product", auth, productController.getAllProducts);
+router.get("/product/:category", auth, productController.getProductsByCategory);
 
 module.exports = router;
