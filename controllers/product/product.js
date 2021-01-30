@@ -29,3 +29,11 @@ exports.getAllProducts = async (req, res, next) => {
     .sort({ createdAt: -1 });
   return res.status(200).send(products);
 };
+
+exports.getProductsByCategory = async (req, res, next) => {
+  const { category } = req.params;
+  const products = await Product.find({ category: category })
+    .populate("userId", "userName")
+    .sort({ createdAt: -1 });
+  return res.status(200).send(products);
+};
