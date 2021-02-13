@@ -48,6 +48,10 @@ router.post(
 router.get("/product", auth, productController.getAllProducts);
 router.get("/product/:id", productController.getProductById);
 router.delete("/product/:id", productController.deleteProductById);
-router.get("/product/:category", auth, productController.getProductsByCategory);
+router.get(
+  "/product-by-category/:category",
+  auth,
+  productController.getProductsByCategory
+);
 
 module.exports = router;

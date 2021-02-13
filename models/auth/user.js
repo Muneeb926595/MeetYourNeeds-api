@@ -26,6 +26,12 @@ const user = new Schema(
     token: {
       type: String,
     },
+    cart: [
+      {
+        type: mongoose.Schema.ObjectId,
+        ref: "product",
+      },
+    ],
   },
 
   {
