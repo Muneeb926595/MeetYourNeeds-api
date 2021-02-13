@@ -1,4 +1,5 @@
 const bycrypt = require("bcryptjs");
+const mongoose = require("mongoose");
 
 const { User, validateUser } = require("../../models/auth/user");
 
@@ -76,4 +77,131 @@ exports.createUser = async (req, res, next) => {
   const result = await client.save();
   const accessToken = client.getAuthToken();
   return res.status(200).send({ _id: result._id, accessToken });
+};
+
+exports.addToCart = async (req, res, next) => {
+  const { userId, productId } = req.body;
+
+  const user = await User.findById(userId);
+
+  if (!user) {
+    return res.status("400").send("User Not Found");
+  }
+
+  if (user.cart) {
+    const currentCartItems = user.cart;
+
+    let newCart = [];
+    if (currentCartItems.length > 0) {
+      newCart = [...currentCartItems, productId];
+    } else {
+      newCart.push(productId);
+    }
+
+    const client = {
+      cart: newCart,
+    };
+
+    const newUser = await User.findByIdAndUpdate(userId, client);
+
+    return res.status(200).send(newUser);
+  } else {
+    let newCart = [];
+    newCart.push(productId);
+
+    const client = {
+      cart: newCart,
+    };
+
+    const newUser = await User.findByIdAndUpdate(userId, client);
+
+    return res.status(200).send(newUser);
+  }
+};
+
+exports.addToCart = async (req, res, next) => {
+  const { userId, productId } = req.body;
+
+  const user = await User.findById(userId);
+
+  if (!user) {
+    return res.status("400").send("User Not Found");
+  }
+
+  if (user.cart) {
+    const currentCartItems = user.cart;
+
+    let newCart = [];
+    if (currentCartItems.length > 0) {
+      newCart = [...currentCartItems, productId];
+    } else {
+      newCart.push(productId);
+    }
+
+    const client = {
+      cart: newCart,
+    };
+
+    const newUser = await User.findByIdAndUpdate(userId, client);
+
+    return res.status(200).send(newUser);
+  } else {
+    let newCart = [];
+    newCart.push(productId);
+
+    const client = {
+      cart: newCart,
+    };
+
+    const newUser = await User.findByIdAndUpdate(userId, client);
+
+    return res.status(200).send(newUser);
+  }
+};
+
+exports.getUserCart = async (req, res, next) => {
+  const { userId } = req.params;
+
+  const user = await User.findById(userId);
+
+  if (!user) {
+    return res.status("400").send("User Not Found");
+  }
+
+  const userCart = await User.aggregate([
+    { $match: { _id: mongoose.Types.ObjectId(userId) } },
+    {
+      $lookup: {
+        from: "products",
+        localField: "cart",
+        foreignField: "_id",
+        as: "cart",
+      },
+    },
+    { $project: { cart: 1, _id: 0 } },
+    { $unwind: "$cart" },
+  ]);
+
+  return res.status("200").send(userCart);
+};
+exports.removeFromCart = async (req, res, next) => {
+  const { userId, productId } = req.params;
+
+  const user = await User.findById(userId);
+
+  if (!user) {
+    return res.status("400").send("User Not Found");
+  }
+
+  if (user.cart && user.cart.length > 0) {
+    const newCart = user.cart.filter(
+      (singleProduct) => singleProduct._id.toString() !== productId.toString()
+    );
+    const client = {
+      cart: newCart,
+    };
+
+    const newUserCart = await User.findByIdAndUpdate(userId, client);
+    return res.status("200").send(newUserCart);
+  }
 };
