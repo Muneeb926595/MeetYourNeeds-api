@@ -30,6 +30,18 @@ exports.getAllProducts = async (req, res, next) => {
   return res.status(200).send(products);
 };
 
+//get product by productId
+exports.getProductById = async (req, res, next) => {
+  const id = req.params.id;
+  const product = await Product.findById(id).populate("userId", "");
+  return res.status(200).send(product);
+};
+exports.deleteProductById = async (req, res, next) => {
+  const id = req.params.id;
+  const product = await Product.findByIdAndDelete(id);
+  return res.status(200).send(product);
+};
+
 exports.getProductsByCategory = async (req, res, next) => {
   const { category } = req.params;
   const products = await Product.find({ category: category })
