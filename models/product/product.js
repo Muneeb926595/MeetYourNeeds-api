@@ -24,6 +24,9 @@ const productSchema = new Schema(
     category: {
       type: String,
     },
+    phoneNo: {
+      type: String,
+    },
   },
 
   {
