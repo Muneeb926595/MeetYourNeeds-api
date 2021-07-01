@@ -6,7 +6,7 @@
     "host":"http://localhost",
     "DataBase_Name": "MeetYourNeeds",
     "mongoDb": {
-      "uri": "mongodb+srv://MeetYourNeeds:9wlm4Vz3t3egCmIf@cluster0.dp2d4.mongodb.net/test",
+      "uri": "mongodb://localhost/fyp",
       "port": "27017"
     }
   }
